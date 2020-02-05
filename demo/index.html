@@ -7,6 +7,164 @@
     <title>demo</title>
 </head>
 <body>
-    h
+    <div>
+        <input type="text" id="test1">
+        <div id="tips"></div>
+    </div>
+    <div>
+        <input type="text" id="test2">
+        <div id="tips2"></div>
+    </div>
+    <div>
+        <input type="text" id="test3">
+        <div id="tips3"></div>
+    </div>
+    <div>
+        <input type="text" id="test4">
+        <div id="tips4"></div>
+    </div>
+    <div>
+        <input type="radio" name="radio" value="1"> 1
+        <input type="radio" name="radio" value="2"> 2
+        <div id="tips5"></div>
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox" value="1"> 1
+        <input type="checkbox" name="checkbox" value="2"> 2
+        <div id="tips6"></div>
+    </div>
+    <div>
+        <select id="test5">
+            <option value="1">测试1</option>
+            <option value="2">测试2</option>
+        </select>
+        <div id="tips7"></div>
+    </div>
+    <div>
+        <a href="javascript:;" id="valid">验证</a>
+    </div>
 </body>
 </html>
+<script src="./assets/js/live-validor.min.js"></script>
+<script>
+    var test = new LiveValidator({
+            needValide: [
+                {
+                    element: '#test1',
+                    type: [
+                        {
+                            slug: 'require',
+                            controller: true,
+                            tipsText: '用户名不能为空'
+                        },
+                        {
+                            slug: 'username',
+                            controller: {
+                                min: 4,
+                                max: 10,
+                                allowChinese: true
+                            }
+                        }
+                    ],
+                    trigger: 'input',
+                    tipsContainer: '#tips'
+                },
+                {
+                    element: '#test2',
+                    type: [
+                        {
+                            slug: 'require',
+                            controller: true
+                        },
+                        {
+                            slug: 'email',
+                            controller: {}
+                        }
+                    ],
+                    trigger: 'input',
+                    tipsContainer: '#tips2'
+                },
+                {
+                    element: '#test3',
+                    type: [
+                        {
+                            slug: 'require',
+                            controller: true
+                        },
+                        {
+                            slug: 'password',
+                            controller: {
+                                min: 4,
+                                max: 20,
+                                allowLowestLevel: 'weak'    // weak, medium, strong, very_strong
+                            }
+                        }
+                    ],
+                    trigger: 'input',
+                    tipsContainer: '#tips3'
+                },
+                {
+                    element: '#test4',
+                    type: [
+                        {
+                            slug: 'equal',
+                            controller: {
+                                compareTarget: '#test3'
+                            },
+                            tipsText: '再次输入密码'
+                        }
+                    ],
+                    trigger: 'input',
+                    tipsContainer: '#tips4'
+                },
+                {
+                    element: '#test5',
+                    type: [
+                        {
+                            slug: 'require',
+                            controller: true,
+                            tipsText: '必填项目'
+                        }
+                    ],
+                    trigger: 'input',
+                    tipsContainer: '#tips7'
+                },
+                {
+                    element: '@radio',
+                    type: [
+                        {
+                            slug: 'require',
+                            controller: {
+                            },
+                            tipsText: '必填项目'
+                        }
+                    ],
+                    trigger: 'change',
+                    tipsContainer: '#tips5'
+                },
+                {
+                    element: '@checkbox',
+                    type: [
+                        {
+                            slug: 'require',
+                            controller: {
+                            },
+                            tipsText: '必填项目'
+                        }
+                    ],
+                    trigger: 'change',
+                    tipsContainer: '#tips6'
+                }
+
+            ],
+            failedClass: 'lv-failed',               // 验证失败class，多个用空格隔开
+            successClass: 'lv-success',             // 验证成功class，多个用空格隔开
+            failedIconClass: 'lv-failed-icon',      // 验证失败图标class，多个用空格隔开
+            successIconClass: 'lv-success-icon',    // 验证成功图标class，多个用空格隔开
+            onFocusShowTips: true                   // 获取焦点时显示提示信息
+        })
+    document.getElementById('valid').onclick = function(){
+        let a= test.valide()
+        console.log(a)
+    }
+</script>
