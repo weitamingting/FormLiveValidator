@@ -106,6 +106,7 @@ export const password = {
     },
     tips: function ( controller ) {
         const pwTip = document.createDocumentFragment(),
+              indicator = controller.indicator ? controller.indicator : ['too_short', 'weak', 'medium', 'strong', 'very_strong', 'very_long'],
               min = controller.min? controller.min: 6,
               max = controller.max? controller.max: 32
 
@@ -115,10 +116,46 @@ export const password = {
             strong: `密码长度为${min}到${max}，必须包含字母、数字、符号至少3种`,
             very_strong: `密码长度为${min}到${max}，必须包含字母、数字、符号至少3种`,
         }
-        
+
+        const symbolList = {
+            too_short: {
+                innerText: '太短',
+                class: 'lv-indicator-too-short'
+            },
+            weak: {
+                innerText: '弱',
+                class: 'lv-indicator-weak'
+            },
+            medium: {
+                innerText: '中等',
+                class: 'lv-indicator-medium'
+            },
+            strong: {
+                innerText: '强',
+                class: 'lv-indicator-strong'
+            },
+            very_strong: {
+                innerText: '非常强',
+                class: 'lv-indicator-very-strong'
+            },
+            too_long: {
+                innerText: '太长',
+                class: 'lv-indicator-too-long'
+            }
+        }
+
         // 生成密码强度指示器
         const createSymbol = document.createElement('div')
         createSymbol.classList.add('lv-pw-strength')
+
+        indicator.forEach( (item) => {
+            const symbol = symbolList[item],
+                  createIndicator = document.createElement('span')
+            createIndicator.innerText = symbol.innerText
+            createIndicator.classList.add(symbol.class)
+            createSymbol.appendChild(createIndicator)
+        } )
+
         pwTip.appendChild(createSymbol)
 
         // 生成密码填写文字提示

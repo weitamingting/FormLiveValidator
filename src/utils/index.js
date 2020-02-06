@@ -42,7 +42,7 @@ export function handlePasswordClass(element, instance, type){
     iconDom.classList.add.apply(iconDom.classList, instance[resultType + 'IconClassList'])
     iconDom.classList.remove.apply(iconDom.classList, instance[anothorType + 'IconClassList'])
 
-    const classMap = ['too_short', 'too_long', 'weak', 'medium', 'strong', 'very_strong']
+    const classMap = ['lv-pw-too-short', 'lv-pw-too-long', 'lv-pw-weak', 'lv-pw-medium', 'lv-pw-strong', 'lv-pw-very-strong']
     element.classList.remove.apply(element.classList, classMap)
     element.classList.add(classMap[type])
 }
