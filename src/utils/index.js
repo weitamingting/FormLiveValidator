@@ -23,28 +23,28 @@ export function addClassMulti(dom, classArray) {
 // 处理class
 export function handleElementClass(element, instance, type) {
     let anothorType = type === 'success'? 'failed': 'success'
-    element.classList.add.apply(element.classList, instance[type + 'ClassList'])
-    element.classList.remove.apply(element.classList, instance[anothorType + 'ClassList'])
+    element.classList.remove(...instance[anothorType + 'ClassList'])
+    element.classList.add(...instance[type + 'ClassList'])
 
-    element.firstChild.classList.add.apply(element.firstChild.classList, instance[type + 'IconClassList'])
-    element.firstChild.classList.remove.apply(element.firstChild.classList, instance[anothorType + 'IconClassList'])
+    element.firstChild.classList.remove(...instance[anothorType + 'IconClassList'])
+    element.firstChild.classList.add(...instance[type + 'IconClassList'])
 }
 // 处理密码class
-export function handlePasswordClass(element, instance, type){
+export function handlePasswordClass(element, instance, testResult, pwRank){
     // 添加成功/失败class
-    let resultType = type > 1? 'success': 'failed'
+    let resultType = testResult? 'success': 'failed'
     let anothorType = resultType === 'success'? 'failed': 'success'
-    element.classList.remove.apply(element.classList, instance[anothorType + 'ClassList'])
-    element.classList.add.apply(element.classList, instance[resultType + 'ClassList'])
+    element.classList.remove(...instance[anothorType + 'ClassList'])
+    element.classList.add(...instance[resultType + 'ClassList'])
 
     // 处理图标class
     const iconDom = getFirstElement( getLastElement(element) )
-    iconDom.classList.add.apply(iconDom.classList, instance[resultType + 'IconClassList'])
-    iconDom.classList.remove.apply(iconDom.classList, instance[anothorType + 'IconClassList'])
+    iconDom.classList.remove(...instance[anothorType + 'IconClassList'])
+    iconDom.classList.add(...instance[resultType + 'IconClassList'])
 
     const classMap = ['lv-pw-too-short', 'lv-pw-too-long', 'lv-pw-weak', 'lv-pw-medium', 'lv-pw-strong', 'lv-pw-very-strong']
-    element.classList.remove.apply(element.classList, classMap)
-    element.classList.add(classMap[type])
+    element.classList.remove(...classMap)
+    element.classList.add(classMap[pwRank])
 }
 export function getElementValue(currentElement){
     const _getValueByHtmlTag = {

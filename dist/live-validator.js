@@ -259,6 +259,9 @@ exports.bindCheckEvent = bindCheckEvent;
 exports.rankPassword = rankPassword;
 exports.isNode = isNode;
 exports.isElement = isElement;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 //移除所有子节点
 function removeAllChildren(dom) {
     var childs = dom.childNodes;
@@ -283,29 +286,33 @@ function addClassMulti(dom, classArray) {
 }
 // 处理class
 function handleElementClass(element, instance, type) {
-    var anothorType = type === 'success' ? 'failed' : 'success';
-    element.classList.add.apply(element.classList, instance[type + 'ClassList']);
-    element.classList.remove.apply(element.classList, instance[anothorType + 'ClassList']);
+    var _element$classList, _element$classList2, _element$firstChild$c, _element$firstChild$c2;
 
-    element.firstChild.classList.add.apply(element.firstChild.classList, instance[type + 'IconClassList']);
-    element.firstChild.classList.remove.apply(element.firstChild.classList, instance[anothorType + 'IconClassList']);
+    var anothorType = type === 'success' ? 'failed' : 'success';
+    (_element$classList = element.classList).remove.apply(_element$classList, _toConsumableArray(instance[anothorType + 'ClassList']));
+    (_element$classList2 = element.classList).add.apply(_element$classList2, _toConsumableArray(instance[type + 'ClassList']));
+
+    (_element$firstChild$c = element.firstChild.classList).remove.apply(_element$firstChild$c, _toConsumableArray(instance[anothorType + 'IconClassList']));
+    (_element$firstChild$c2 = element.firstChild.classList).add.apply(_element$firstChild$c2, _toConsumableArray(instance[type + 'IconClassList']));
 }
 // 处理密码class
-function handlePasswordClass(element, instance, type) {
+function handlePasswordClass(element, instance, testResult, pwRank) {
+    var _element$classList3, _element$classList4, _iconDom$classList, _iconDom$classList2, _element$classList5;
+
     // 添加成功/失败class
-    var resultType = type > 1 ? 'success' : 'failed';
+    var resultType = testResult ? 'success' : 'failed';
     var anothorType = resultType === 'success' ? 'failed' : 'success';
-    element.classList.remove.apply(element.classList, instance[anothorType + 'ClassList']);
-    element.classList.add.apply(element.classList, instance[resultType + 'ClassList']);
+    (_element$classList3 = element.classList).remove.apply(_element$classList3, _toConsumableArray(instance[anothorType + 'ClassList']));
+    (_element$classList4 = element.classList).add.apply(_element$classList4, _toConsumableArray(instance[resultType + 'ClassList']));
 
     // 处理图标class
     var iconDom = getFirstElement(getLastElement(element));
-    iconDom.classList.add.apply(iconDom.classList, instance[resultType + 'IconClassList']);
-    iconDom.classList.remove.apply(iconDom.classList, instance[anothorType + 'IconClassList']);
+    (_iconDom$classList = iconDom.classList).remove.apply(_iconDom$classList, _toConsumableArray(instance[anothorType + 'IconClassList']));
+    (_iconDom$classList2 = iconDom.classList).add.apply(_iconDom$classList2, _toConsumableArray(instance[resultType + 'IconClassList']));
 
     var classMap = ['lv-pw-too-short', 'lv-pw-too-long', 'lv-pw-weak', 'lv-pw-medium', 'lv-pw-strong', 'lv-pw-very-strong'];
-    element.classList.remove.apply(element.classList, classMap);
-    element.classList.add(classMap[type]);
+    (_element$classList5 = element.classList).remove.apply(_element$classList5, classMap);
+    element.classList.add(classMap[pwRank]);
 }
 function getElementValue(currentElement) {
     var _getValueByHtmlTag = {
@@ -665,24 +672,22 @@ var password = exports.password = {
         var min = controller.min ? controller.min : 6,
             max = controller.max ? controller.max : 32,
             lowest = controller.allowLowestLevel ? controller.allowLowestLevel : 'weak';
-        var testResult = (0, _utils.rankPassword)(value, min, max);
+        var pwRank = (0, _utils.rankPassword)(value, min, max);
+        var testResult = pwRank > 1 && pwRank >= strengthMap[lowest] ? true : false;
         // 仅验证模式
         if (justValide) {
             // 结果不为
-            return testResult > 1 && testResult >= strengthMap[lowest] ? true : false;
+            return testResult;
         }
         var tipWraper = document.getElementById(tipIdOfThisType);
-        if (testResult) {
-            (0, _utils.handlePasswordClass)(tipWraper, _this, testResult);
-        } else {
-            (0, _utils.handlePasswordClass)(tipWraper, _this, testResult);
-        }
 
-        return testResult > 1 && testResult >= strengthMap[lowest] ? true : false;
+        (0, _utils.handlePasswordClass)(tipWraper, _this, testResult, pwRank);
+
+        return testResult;
     },
     tips: function tips(controller) {
         var pwTip = document.createDocumentFragment(),
-            indicator = controller.indicator ? controller.indicator : ['too_short', 'weak', 'medium', 'strong', 'very_strong', 'very_long'],
+            indicator = controller.indicator ? controller.indicator : ['too_short', 'weak', 'medium', 'strong', 'very_strong', 'too_long'],
             min = controller.min ? controller.min : 6,
             max = controller.max ? controller.max : 32;
 

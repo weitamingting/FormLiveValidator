@@ -89,24 +89,22 @@ export const password = {
         let min = controller.min? controller.min: 6,
             max = controller.max? controller.max: 32,
             lowest = controller.allowLowestLevel? controller.allowLowestLevel: 'weak'
-        const testResult = rankPassword(value, min, max)
+        const pwRank = rankPassword(value, min, max)
+        const testResult = pwRank > 1 && pwRank >= strengthMap[lowest] ? true : false
         // 仅验证模式
         if(justValide){
             // 结果不为
-            return testResult > 1 && testResult >= strengthMap[lowest] ? true : false
+            return testResult
         }
         const tipWraper = document.getElementById(tipIdOfThisType)
-        if( testResult ){
-            handlePasswordClass(tipWraper, _this, testResult)
-        }else{
-            handlePasswordClass(tipWraper, _this, testResult)
-        }
 
-        return testResult > 1 && testResult >= strengthMap[lowest] ? true : false
+        handlePasswordClass(tipWraper, _this, testResult, pwRank)
+
+        return testResult
     },
     tips: function ( controller ) {
         const pwTip = document.createDocumentFragment(),
-              indicator = controller.indicator ? controller.indicator : ['too_short', 'weak', 'medium', 'strong', 'very_strong', 'very_long'],
+              indicator = controller.indicator ? controller.indicator : ['too_short', 'weak', 'medium', 'strong', 'very_strong', 'too_long'],
               min = controller.min? controller.min: 6,
               max = controller.max? controller.max: 32
 
