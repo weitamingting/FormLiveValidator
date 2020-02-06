@@ -5,8 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
-    'live-validor': './src/index.js',
-    'live-validor.min': './src/index.js'
+    'live-validator': './src/index.js',
+    'live-validator.min': './src/index.js'
   },
   output: {
     filename: "[name].js",

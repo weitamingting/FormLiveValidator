@@ -1,6 +1,6 @@
 {
-  "name": "live-validator",
-  "version": "1.0.0",
+  "name": "form-live-validator",
+  "version": "1.0.1",
   "description": "A very simple javascript form validator with live tips, indicator of password strength, email validate, username, etc",
   "main": "index.js",
   "scripts": {
@@ -10,11 +10,16 @@
   },
   "keywords": [
     "validator",
-    "form",
-    "validate"
+    "live validator",
+    "form validate"
   ],
   "author": "weitamingting",
-  "license": "ISC",
+  "homepage": "https://github.com/weitamingting/FormLiveValidator",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weitamingting/FormLiveValidator.git"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
