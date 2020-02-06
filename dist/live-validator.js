@@ -303,7 +303,7 @@ function handlePasswordClass(element, instance, type) {
     iconDom.classList.add.apply(iconDom.classList, instance[resultType + 'IconClassList']);
     iconDom.classList.remove.apply(iconDom.classList, instance[anothorType + 'IconClassList']);
 
-    var classMap = ['too_short', 'too_long', 'weak', 'medium', 'strong', 'very_strong'];
+    var classMap = ['lv-pw-too-short', 'lv-pw-too-long', 'lv-pw-weak', 'lv-pw-medium', 'lv-pw-strong', 'lv-pw-very-strong'];
     element.classList.remove.apply(element.classList, classMap);
     element.classList.add(classMap[type]);
 }
@@ -682,6 +682,7 @@ var password = exports.password = {
     },
     tips: function tips(controller) {
         var pwTip = document.createDocumentFragment(),
+            indicator = controller.indicator ? controller.indicator : ['too_short', 'weak', 'medium', 'strong', 'very_strong', 'very_long'],
             min = controller.min ? controller.min : 6,
             max = controller.max ? controller.max : 32;
 
@@ -690,10 +691,46 @@ var password = exports.password = {
             medium: '\u5BC6\u7801\u957F\u5EA6\u4E3A' + min + '\u5230' + max + '\uFF0C\u5FC5\u987B\u5305\u542B\u5B57\u6BCD\u3001\u6570\u5B57\u3001\u7B26\u53F7\u81F3\u5C112\u79CD',
             strong: '\u5BC6\u7801\u957F\u5EA6\u4E3A' + min + '\u5230' + max + '\uFF0C\u5FC5\u987B\u5305\u542B\u5B57\u6BCD\u3001\u6570\u5B57\u3001\u7B26\u53F7\u81F3\u5C113\u79CD',
             very_strong: '\u5BC6\u7801\u957F\u5EA6\u4E3A' + min + '\u5230' + max + '\uFF0C\u5FC5\u987B\u5305\u542B\u5B57\u6BCD\u3001\u6570\u5B57\u3001\u7B26\u53F7\u81F3\u5C113\u79CD'
+        };
+
+        var symbolList = {
+            too_short: {
+                innerText: '太短',
+                class: 'lv-indicator-too-short'
+            },
+            weak: {
+                innerText: '弱',
+                class: 'lv-indicator-weak'
+            },
+            medium: {
+                innerText: '中等',
+                class: 'lv-indicator-medium'
+            },
+            strong: {
+                innerText: '强',
+                class: 'lv-indicator-strong'
+            },
+            very_strong: {
+                innerText: '非常强',
+                class: 'lv-indicator-very-strong'
+            },
+            too_long: {
+                innerText: '太长',
+                class: 'lv-indicator-too-long'
+            }
 
             // 生成密码强度指示器
         };var createSymbol = document.createElement('div');
         createSymbol.classList.add('lv-pw-strength');
+
+        indicator.forEach(function (item) {
+            var symbol = symbolList[item],
+                createIndicator = document.createElement('span');
+            createIndicator.innerText = symbol.innerText;
+            createIndicator.classList.add(symbol.class);
+            createSymbol.appendChild(createIndicator);
+        });
+
         pwTip.appendChild(createSymbol);
 
         // 生成密码填写文字提示

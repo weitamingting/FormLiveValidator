@@ -1,6 +1,6 @@
 {
   "name": "form-live-validator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A very simple javascript form validator with live tips, indicator of password strength, email validate, username, etc",
   "main": "index.js",
   "scripts": {
