@@ -1,6 +1,6 @@
 # FormLiveValidator
-一个非常简洁轻量的表单验证插件，可以实时监测表单输入是否合规，提供了用户名、密码、邮箱等验证，带密码强度指示器，无js库依赖
-A very simple javascript form validator with live tips, indicator of password strength, email validate, username, etc
+    一个非常简洁轻量的表单验证插件，可以实时监测表单输入是否合规，提供了用户名、密码、邮箱等验证，带密码强度指示器，无js库依赖
+    A very simple javascript form validator with live tips, indicator of password strength, email validate, username, etc
 
 ## 安装
 
@@ -32,7 +32,7 @@ var test = new LiveValidator({
             // needValide：一个对象数组，记录了所有需要验证的表单和验证类型等信息
             needValide: [
                 {
-                    // element：表单（input、select等）的id或name属性，id以#号开头，name以@开头，例如：#test、@test 
+                    // element：表单（input、radio、select等）的id或name属性，id以#号开头，name以@开头，例如：#test、@test 
                     element: '#test1',
                     // type：一个对象数组，记录了当前element需要执行的验证类型
                     type: [
