@@ -168,7 +168,7 @@ var test = new LiveValidator({
 ## 选项说明
 
 | 选项 | 说明 | 示例 |
-
+| ---------- | -----------| -----------|
 | needValide | 一个对象数组，记录了所有需要验证的表单和验证类型等信息，每个对象含有四个属性element、type、trigger、tipsContainer；| ... |
 | needValide[n].element | 需要验证的表单元素的id或name，当表单元素为input，并且type为text/email/number等单行文本或select时使用id选择器，以#号开头，例如"#test"，当表单元素为radio、checkbox时，使用name选择器，以@开头，例如"@test" | ... |
 | needValide[n].type | 该表单元素需要进行的验证类型，是一个对象数组，每个对象由三个属性构成:slug、controller、tipsText | ... |
