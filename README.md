@@ -1,6 +1,7 @@
 # FormLiveValidator
 
 一个非常简洁轻量的表单验证插件，可以实时监测表单输入是否合规，提供了用户名、密码、邮箱等验证，带密码强度指示器，无js库依赖
+--------
 A very simple javascript form validator with live tips, indicator of password strength, email validate, username, etc
 
 ## 安装
