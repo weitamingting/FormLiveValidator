@@ -166,12 +166,25 @@ var test = new LiveValidator({
 ```
 ## 选项说明
 
-| 选项 | 说明 | 示例 |
+| 选项 | 类型 | 说明 | 示例 |
 | ---------- | -----------| -----------|
-| needValide | 一个对象数组，记录了所有需要验证的表单和验证类型等信息，每个对象含有四个属性element、type、trigger、tipsContainer；| ... |
-| needValide[n].element | 需要验证的表单元素的id或name，当表单元素为input，并且type为text/email/number等单行文本或select时使用id选择器，以#号开头，例如"#test"，当表单元素为radio、checkbox时，使用name选择器，以@开头，例如"@test" | "#element-id"/"@element-name" |
-| needValide[n].type | 该表单元素需要进行的验证类型，是一个对象数组，每个对象由三个属性构成:slug、controller、tipsText | ... |
-| needValide[n].type[n].slug | 验证类型名称，例如必填项："require"，目前支持必填项、用户名、密码强度等验证类型，将在下方详细介绍 | 'require' |
-| needValide[n].type[n].controller | 当前验证类型的控制器，例如验证类型为密码强度时，你可以在controller中规定密码最短位数、最长位数等信息，下方会详细介绍每个验证类型的controller | ... |
-| needValide[n].trigger | 触发验证的事件； | change/input/click等 |
-| needValide[n].tipsContainer | 当前验证类型的提示文本的容器id； | #test |
+| needValide | Array | 一个对象数组，记录了所有需要验证的表单和验证类型等信息，每个对象含有四个属性`element`、`type`、`trigger`、`tipsContainer`；| ... |
+| needValide[n].element | String | 需要验证的表单元素的id或name，当表单元素为input，并且type为text/email/number等单行文本或select时使用id选择器，以#号开头，例如"#test"，当表单元素为radio、checkbox时，使用name选择器，以@开头，例如"@test" | "#element-id"/"@element-name" |
+| needValide[n].type | String | 该表单元素需要进行的验证类型，是一个对象数组，每个对象由三个属性构成:slug、controller、tipsText | ... |
+| needValide[n].type[n].slug | String | 验证类型名称，例如必填项："require"，目前支持必填项、用户名、密码强度等验证类型，将在下方详细介绍 | 'require' |
+| needValide[n].type[n].controller | Object/Boolean | 当前验证类型的控制器，例如验证类型为密码强度时，你可以在controller中规定密码最短位数、最长位数等信息，下方会详细介绍每个验证类型的controller | ... |
+| needValide[n].type[n].tipsText | String | 当前验证类型的提示文本 | '必填项目' |
+| needValide[n].trigger | String | 触发验证的事件； | 'change'/'input'/'click'等 |
+| needValide[n].tipsContainer | String | 当前验证类型的提示文本的容器id，needValide[n].type[n].tipsText中设置的文本将显示在这里，当needValide[n].type元素不止一个时会为每种验证类型创建提示； | '#test' |
+| failedClass | String | 当验证失败时为tipsText所在的DOM添加的class，可以多个，中间用空格隔开 | 'lv-failed' |
+| successClass | String | 当验证成功时为tipsText所在的DOM添加的class，可以多个，中间用空格隔开 | 'lv-success' |
+| failedIconClass | String | LiveValidator会在每条验证提示前面添加一个<i></i>元素，并且会根据验证成功/失败添加不同的class，你可以利用字体图标或背景图为不同验证状态添加不同的图标，failedIconClass为验证失败时在<i>元素添加的class，可以多个，中间用空格隔开 | 'lv-failed-icon' |
+| successIconClass | String | LiveValidator会在每条验证提示前面添加一个<i></i>元素，并且会根据验证成功/失败添加不同的class，你可以利用字体图标或背景图为不同验证状态添加不同的图标，successIconClass为验证成功时在<i>元素添加的class，可以多个，中间用空格隔开 | 'lv-success-icon' |
+| onFocusShowTips | Boolean | 获取焦点时是否对当前表单验证 | true |
+
+## 方法
+`valide()`
+### 说明：
+对表单进行验证
+### 返回值：
+`Boolean`，验证成功时为true，验证失败为false
