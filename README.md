@@ -178,8 +178,8 @@ var test = new LiveValidator({
 | needValide[n].tipsContainer | String | 当前验证类型的提示文本的容器id，needValide[n].type[n].tipsText中设置的文本将显示在这里，当needValide[n].type元素不止一个时会为每种验证类型创建提示； | '#test' |
 | failedClass | String | 当验证失败时为tipsText所在的DOM添加的class，可以多个，中间用空格隔开 | 'lv-failed' |
 | successClass | String | 当验证成功时为tipsText所在的DOM添加的class，可以多个，中间用空格隔开 | 'lv-success' |
-| failedIconClass | String | LiveValidator会在每条验证提示前面添加一个```html<i></i>```元素，并且会根据验证成功/失败添加不同的class，你可以利用字体图标或背景图为不同验证状态添加不同的图标，failedIconClass为验证失败时在```html<i></i>```元素添加的class，可以多个，中间用空格隔开 | 'lv-failed-icon' |
-| successIconClass | String | LiveValidator会在每条验证提示前面添加一个```html<i></i>```元素，并且会根据验证成功/失败添加不同的class，你可以利用字体图标或背景图为不同验证状态添加不同的图标，successIconClass为验证成功时在```html<i></i>```元素添加的class，可以多个，中间用空格隔开 | 'lv-success-icon' |
+| failedIconClass | String | LiveValidator会在每条验证提示前面添加一个`<i>`元素，并且会根据验证成功/失败添加不同的class，你可以利用字体图标或背景图为不同验证状态添加不同的图标，failedIconClass为验证失败时在`<i>`元素添加的class，可以多个，中间用空格隔开 | 'lv-failed-icon' |
+| successIconClass | String | LiveValidator会在每条验证提示前面添加一个`<i>`元素，并且会根据验证成功/失败添加不同的class，你可以利用字体图标或背景图为不同验证状态添加不同的图标，successIconClass为验证成功时在`<i>`元素添加的class，可以多个，中间用空格隔开 | 'lv-success-icon' |
 | onFocusShowTips | Boolean | 获取焦点时是否对当前表单验证 | true |
 
 ### 支持的验证类型
