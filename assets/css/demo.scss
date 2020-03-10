@@ -1,0 +1,137 @@
+body{
+    background-color: #eeeeee;
+}
+*{
+    box-sizing: border-box;
+}
+.lv-register-wrap{
+    width: 600px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 40px;
+    .lv-welcome{
+        font-size: 24px;
+        margin: 0 0 20px;
+    }
+    .lv-register-form{
+        width: 100%;
+        &:after{content: ''; display: block; width: 0; height: 0; clear: both;}
+        .lv-reg-box{
+            .lv-reg-inputarea{
+                &.lv-reg-valide{
+                    padding-right: 170px;
+                    .lv-reg-valide-img{
+                        width: 160px;
+                        height: 45px;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        background-color: #eee;
+                        img{
+                            width: 100%;
+                            height: 45px;
+                        }
+                    }
+                }
+                &.lv-reg-mobile{display: none;}
+                position: relative;
+                margin-bottom: 20px;
+                .lv-reg-tips{
+                    display: none;
+                }
+                .lv-reg-icon{
+                    display: block;
+                    width: 45px;
+                    height: 45px;
+                    font-size: 20px;
+                    color: #666666;
+                    text-align: center;
+                    line-height: 45px;
+                    position: absolute;
+                    left: 0px;
+                    top: 0px;
+                    z-index: 1;
+                }
+                input[type=text], input[type=password]{
+                    width: 100%;
+                    height: 45px;
+                    padding-left: 45px;
+                    font-size: 14px;
+                    border: 1px solid #e1e1e1;
+                    &:focus{
+                        border-color: #cccccc;
+                    }
+                }
+            }
+            .lv-reg-tips{
+                font-size: 14px;
+                color: #666666;
+                margin-top: 10px;
+                & > div{
+                    transition: all .5s;
+                }
+                i{
+                    font-size: 14px;
+                }
+                .lv-failed{
+                    color: #ff0000;
+                }
+                .lv-success{
+                    color: #19ad68;
+                }
+                .lv-pw-strength{
+                    display: flex;
+                    justify-content: space-between;
+                    border-top: 1px solid #eeeeee;
+                    border-right: 1px solid #eeeeee;
+                    span{
+                        transition: all .5s;
+                        width: 25%;
+                        text-align: center;
+                        border-left: 1px solid #eeeeee;
+                        border-bottom: 1px solid #eeeeee;
+                        color: #333333;
+                        padding: 3px 0;
+                        font-size: 12px;
+                    }
+                }
+                .lv-pw-weak{
+                    .lv-indicator-weak{
+                        background-color: #ffeb5f;
+                    }
+                }
+                .lv-pw-medium{
+                    .lv-indicator-medium{
+                        background-color: #ff9900;
+                    }
+                }
+                .lv-pw-strong{
+                    .lv-indicator-strong{
+                        background-color: #45f652;
+                        color: #ffffff;
+                    }
+                }
+                .lv-pw-very-strong{
+                    .lv-indicator-very-strong{
+                        background-color: #4db2ec;
+                        color: #ffffff;
+                    }
+                }
+            }
+            .lv-reg-submit{
+                transition: all .5s;
+                width: 100%;
+                height: 40px;
+                cursor: pointer;
+                border-radius: 5px;
+                color: #ffffff;
+                background-color: #00a2ff;
+                border: none;
+                box-shadow: 0px 0px 20px rgba(77, 178, 236, .3);
+                &:hover{
+                    background-color: #4cbeff;
+                }
+            }
+        }
+    }
+}
