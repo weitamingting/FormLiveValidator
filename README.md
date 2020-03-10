@@ -203,6 +203,7 @@ var test = new LiveValidator({
     }
 }
 ```
+***
 #### require
 是否必填，对表单的值长度进行验证，长度为0时验证失败，反之成功
 ##### 支持的controller
