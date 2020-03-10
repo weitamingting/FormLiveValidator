@@ -182,6 +182,39 @@ var test = new LiveValidator({
 | successIconClass | String | LiveValidator会在每条验证提示前面添加一个<i></i>元素，并且会根据验证成功/失败添加不同的class，你可以利用字体图标或背景图为不同验证状态添加不同的图标，successIconClass为验证成功时在<i>元素添加的class，可以多个，中间用空格隔开 | 'lv-success-icon' |
 | onFocusShowTips | Boolean | 获取焦点时是否对当前表单验证 | true |
 
+### 支持的验证类型
+#### username
+用户名验证，对字符串进行长度、字符类型验证；
+##### 支持的controller
+`min` 最短长度
+
+`max` 最长长度
+
+`allowChinese` 是否允许含有中文
+
+例如：
+```js
+{
+    slug: 'username',
+    controller: {
+        min: 4,
+        max: 10,
+        allowChinese: true
+    }
+}
+```
+#### require
+是否必填，对表单的值长度进行验证，长度为0时验证失败，反之成功
+##### 支持的controller
+controller值为true时，是必填项，值为false时，是非必填项，缺省表示必填项
+例如：
+```js
+{
+    slug: 'require',
+    controller: true
+},
+```
+
 ## 方法
 `valide()`
 ### 说明：
