@@ -5,166 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>demo</title>
+    <link rel='stylesheet' href='./assets/fonts/iconfont.css' type='text/css' />
+    <link rel='stylesheet' href='./assets/css/demo.min.css' type='text/css' />
 </head>
 <body>
-    <div>
-        <input type="text" id="test1">
-        <div id="tips"></div>
-    </div>
-    <div>
-        <input type="text" id="test2">
-        <div id="tips2"></div>
-    </div>
-    <div>
-        <input type="text" id="test3">
-        <div id="tips3"></div>
-    </div>
-    <div>
-        <input type="text" id="test4">
-        <div id="tips4"></div>
-    </div>
-    <div>
-        <input type="radio" name="radio" value="1"> 1
-        <input type="radio" name="radio" value="2"> 2
-        <div id="tips5"></div>
-    </div>
-    <div>
-        <input type="checkbox" name="checkbox" value="1"> 1
-        <input type="checkbox" name="checkbox" value="2"> 2
-        <div id="tips6"></div>
-    </div>
-    <div>
-        <select id="test5">
-            <option value="1">测试1</option>
-            <option value="2">测试2</option>
-        </select>
-        <div id="tips7"></div>
-    </div>
-    <div>
-        <a href="javascript:;" id="valid">验证</a>
+    <div class="lv-register-wrap">
+        <div class="lv-register">
+            <h3 class="lv-welcome">欢迎</h3>
+            <div class="lv-register-form">
+                <div class="lv-reg-box">
+                    <div class="lv-reg-inputarea">
+                        <i class="siconfont sicon-b-36 lv-reg-icon"></i>
+                        <input placeholder="请输入用户名" type="text" id="lv_user_login" value="">
+                        <div class="lv-reg-tips" id="lv_user_login_tips"></div>
+                    </div>
+                    <div class="lv-reg-inputarea">
+                        <i class="siconfont sicon-b-153 lv-reg-icon"></i>
+                        <input placeholder="请输入邮箱" type="text" id="lv_user_email" value="">
+                        <div class="lv-reg-tips" id="lv_user_email_tips"></div>
+                    </div>
+                    <div class="lv-reg-inputarea">
+                        <i class="siconfont sicon-b-37 lv-reg-icon"></i>
+                        <input placeholder="请输入密码" type="password" id="lv_user_pwd1" value="">
+                        <div class="lv-reg-tips" id="lv_user_pwd1_tips"></div>
+                    </div>
+                    <div class="lv-reg-inputarea">
+                        <i class="siconfont sicon-b-37 lv-reg-icon"></i>
+                        <input placeholder="重复密码" type="password" id="lv_user_pwd2" value="">
+                        <div class="lv-reg-tips" id="lv_user_pwd2_tips"></div>
+                    </div>
+                    <div class="">
+                        <button href="javascript:;" id="lv-reg-submit" class="lv-reg-submit">
+                            立即注册
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
 <script src="./assets/js/live-validator.min.js"></script>
 <script>
-    var test = new LiveValidator({
-            needValide: [
-                {
-                    element: '#test1',
-                    type: [
-                        {
-                            slug: 'require',
-                            controller: true,
-                            tipsText: '用户名不能为空'
-                        },
-                        {
-                            slug: 'username',
-                            controller: {
-                                min: 4,
-                                max: 10,
-                                allowChinese: true
+   var lv = new LiveValidator({
+                needValide: [
+                    {
+                        element: '#lv_user_login',
+                        type: [
+                            {
+                                slug: 'require',
+                                controller: true,
+                                tipsText: '用户名不能为空'
+                            },
+                            {
+                                slug: 'username',
+                                controller: {
+                                    min: 4,
+                                    max: 10,
+                                    allowChinese: true
+                                },
+                                tipsText: '请输入4-10位字母、数字组合'
                             }
-                        }
-                    ],
-                    trigger: 'input',
-                    tipsContainer: '#tips'
-                },
-                {
-                    element: '#test2',
-                    type: [
-                        {
-                            slug: 'require',
-                            controller: true
-                        },
-                        {
-                            slug: 'email',
-                            controller: {}
-                        }
-                    ],
-                    trigger: 'input',
-                    tipsContainer: '#tips2'
-                },
-                {
-                    element: '#test3',
-                    type: [
-                        {
-                            slug: 'require',
-                            controller: true
-                        },
-                        {
-                            slug: 'password',
-                            controller: {
-                                min: 4,
-                                max: 20,
-                                allowLowestLevel: 'weak'    // weak, medium, strong, very_strong
+                        ],
+                        trigger: 'input',
+                        tipsContainer: '#lv_user_login_tips'
+                    },
+                    {
+                        element: '#lv_user_email',
+                        type: [
+                            {
+                                slug: 'require',
+                                controller: true,
+                                tipsText: '邮箱不能为空'
+                            },
+                            {
+                                slug: 'email',
+                                controller: {},
+                                tipsText: '请输入正确格式邮箱'
                             }
-                        }
-                    ],
-                    trigger: 'input',
-                    tipsContainer: '#tips3'
-                },
-                {
-                    element: '#test4',
-                    type: [
-                        {
-                            slug: 'equal',
-                            controller: {
-                                compareTarget: '#test3'
+                        ],
+                        trigger: 'input',
+                        tipsContainer: '#lv_user_email_tips'
+                    },
+                    {
+                        element: '#lv_user_pwd1',
+                        type: [
+                            {
+                                slug: 'password',
+                                controller: {
+                                    min: 4,
+                                    max: 20,
+                                    allowLowestLevel: 'medium',    // weak, medium, strong, very_strong
+                                    indicator: ['weak', 'medium', 'strong', 'very_strong']
+                                }
                             },
-                            tipsText: '再次输入密码'
-                        }
-                    ],
-                    trigger: 'input',
-                    tipsContainer: '#tips4'
-                },
-                {
-                    element: '#test5',
-                    type: [
-                        {
-                            slug: 'require',
-                            controller: true,
-                            tipsText: '必填项目'
-                        }
-                    ],
-                    trigger: 'input',
-                    tipsContainer: '#tips7'
-                },
-                {
-                    element: '@radio',
-                    type: [
-                        {
-                            slug: 'require',
-                            controller: {
-                            },
-                            tipsText: '必填项目'
-                        }
-                    ],
-                    trigger: 'change',
-                    tipsContainer: '#tips5'
-                },
-                {
-                    element: '@checkbox',
-                    type: [
-                        {
-                            slug: 'require',
-                            controller: {
-                            },
-                            tipsText: '必填项目'
-                        }
-                    ],
-                    trigger: 'change',
-                    tipsContainer: '#tips6'
-                }
-
-            ],
-            failedClass: 'lv-failed',               // 验证失败class，多个用空格隔开
-            successClass: 'lv-success',             // 验证成功class，多个用空格隔开
-            failedIconClass: 'lv-failed-icon',      // 验证失败图标class，多个用空格隔开
-            successIconClass: 'lv-success-icon',    // 验证成功图标class，多个用空格隔开
-            onFocusShowTips: true                   // 获取焦点时显示提示信息
-        })
-    document.getElementById('valid').onclick = function(){
-        let a= test.valide()
-        console.log(a)
+                            {
+                                slug: 'require',
+                                controller: true,
+                                tipsText: '密码不能为空'
+                            }
+                        ],
+                        trigger: 'input',
+                        tipsContainer: '#lv_user_pwd1_tips'
+                    },
+                    {
+                        element: '#lv_user_pwd2',
+                        type: [
+                            {
+                                slug: 'equal',
+                                controller: {
+                                    compareTarget: '#lv_user_pwd1'
+                                },
+                                tipsText: '再次输入密码'
+                            }
+                        ],
+                        trigger: 'input',
+                        tipsContainer: '#lv_user_pwd2_tips'
+                    }
+                ],
+                failedClass: 'lv-failed',               // 验证失败class，多个用空格隔开
+                successClass: 'lv-success',             // 验证成功class，多个用空格隔开
+                failedIconClass: 'siconfont sicon-b-158',      // 验证失败图标class，多个用空格隔开
+                successIconClass: 'siconfont sicon-b-12',    // 验证成功图标class，多个用空格隔开
+                onFocusShowTips: true                   // 获取焦点时显示提示信息
+            })
+    document.getElementById('lv-reg-submit').onclick = function(){
+        if ( lv.valide() ) {
+            alert('验证通过')
+        } else {
+            alert('验证失败')
+        }
     }
 </script>
