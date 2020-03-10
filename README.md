@@ -208,13 +208,74 @@ var test = new LiveValidator({
 是否必填，对表单的值长度进行验证，长度为0时验证失败，反之成功
 ##### 支持的controller
 controller值为true时，是必填项，值为false时，是非必填项，缺省表示必填项
+
 例如：
 ```js
 {
     slug: 'require',
     controller: true
-},
+}
 ```
+***
+#### password
+对密码的长度、强度进行验证，可以随用户输入自动计算密码强度并实时显示出来
+
+密码提示由两部分构成：密码强度指示器、文本提示
+
+LiveValidator会随用户输入自动计算密码强度，并将密码强度对应的class添加到密码强度指示器上，密码强度可能的class有：lv-pw-too-short（密码太短）、lv-pw-weak（弱）、lv-pw-medium（中等）、lv-pw-strong（强）、lv-pw-very-strong（非常强）
+
+密码验证是否通过也会实时的显示反应到强度指示器上，具体来说就是将选项中规定的successClass/failedClass添加到强度指示器DOM
+
+你可以根据这些实时的class做出非常多有意思的提示效果
+##### 支持的controller
+`min` 密码最短长度
+
+`max` 密码最长长度
+
+`allowLowestLevel` 允许密码的最低强度，允许的值有：`weak`, `medium`, `strong`, `very_strong`
+
+`indicator`: 密码强度指示器显示的强度类型，一个数组，允许的值：['weak', 'medium', 'strong', 'very_strong']
+
+例如：
+```js
+{
+    slug: 'password',
+    controller: {
+        min: 4,
+        max: 20,
+        allowLowestLevel: 'weak',
+        indicator: ['weak', 'medium', 'strong', 'very_strong']
+    }
+}
+```
+***
+#### equal
+判断与某表单元素值是否相等
+##### 支持的controller
+`compareTarget` 需要对比的表单元素的id
+
+例如：
+```js
+{
+    slug: 'equal',
+    controller: {
+        compareTarget: '#test3'
+    }
+}
+```
+***
+#### email
+对邮箱格式进行验证，暂不支持自定义controller
+
+例如：
+```js
+{
+    slug: 'email',
+    controller: {}
+}
+```
+
+
 
 ## 方法
 `valide()`
